@@ -71,7 +71,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $jobName;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="date")
      */
     private $created_At;
 
@@ -253,12 +253,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_At;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_At): self
+    public function setCreatedAt(\DateTimeInterface $created_At): self
     {
         $this->created_At = $created_At;
 
