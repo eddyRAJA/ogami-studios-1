@@ -29,10 +29,6 @@ class AboutCrudController extends AbstractCrudController
             TextField::new('linkedin'),
             TextField::new('instagram'),
             TextField::new('twitter'),
-
-            
-            
-            
         ];
     }
     

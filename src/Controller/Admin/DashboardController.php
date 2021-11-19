@@ -8,6 +8,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\About;
+use App\Entity\Compagny;
+use App\Entity\User;
+
 
 class DashboardController extends AbstractDashboardController
 {
@@ -29,5 +32,8 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('About-us', 'fas fa-newspaper', About::class);
+        yield MenuItem::linkToCrud('Compagnies', 'fas fa-newspaper', Compagny::class);
+        # yield MenuItem::linkToCrud('Illustration', 'fas fa-newspaper', Illustration::class);
+        yield MenuItem::linkToCrud('Users', 'fas fa-newspaper', User::class);
     }
 }
