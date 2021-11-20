@@ -20,7 +20,7 @@ class IllustrationFixtures extends Fixture
             # code...
             $illustration = new Illustration();
             $illustration->setName($faker->company())
-                ->setUrl($faker->imageUrl())
+                ->setUrl($faker->imageUrl(680, 400, ['cinema']))
                 ->setCreatedAt( \DateTimeImmutable::createFromMutable($faker->datetime()))
                 ->setUpdatedAt(\DateTimeImmutable::createFromMutable($faker->datetime())) ;
            
