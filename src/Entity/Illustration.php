@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\IllustrationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=IllustrationRepository::class)
@@ -27,16 +28,20 @@ class Illustration
      */
     private $url;
 
+    /**
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
-    private $updated_At;
+    private $updated_at;
 
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $created_At;
 
     public function getId(): ?int
     {
@@ -68,28 +73,14 @@ class Illustration
     }
 
     
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updated_At;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updated_At): self
-    {
-        $this->updated_At = $updated_At;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_At;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_At): self
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        $this->created_At = $created_At;
-
-        return $this;
+        return $this->updated_At;
     }
+
 }
