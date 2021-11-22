@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -71,9 +72,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $jobName;
 
     /**
-     * @ORM\Column(type="date")
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $created_At;
+    private $created_at;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
 
     /**
      * @ORM\ManyToOne(targetEntity=Compagny::class, inversedBy="users")
@@ -255,15 +263,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_At;
+        return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_At): self
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        $this->created_At = $created_At;
-
-        return $this;
+        return $this->updated_at;
     }
+
 
     public function getCompagny(): ?Compagny
     {
@@ -276,5 +283,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
 }

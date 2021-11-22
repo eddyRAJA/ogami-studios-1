@@ -38,7 +38,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setPhoneNumber($faker->numerify())
             ->setJobName($faker->jobTitle())
             ->setCompagny($this->getReference('compagny_'. $faker->numberBetween(0,4)))
-            ->setCreatedAt($faker->datetime())
+            //->setCreatedAt($faker->datetime())
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->passwordHasher->hashPassword(
                 $admin,
@@ -60,7 +60,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setPhoneNumber($faker->numerify())
             ->setJobName($faker->jobTitle())
             ->setCompagny($this->getReference('compagny_' . $faker->numberBetween(0,4)) )
-            ->setCreatedAt($faker->datetime())
+            //->setCreatedAt($faker->datetime())
             ->setRoles(['ROLE_CUSTOMER'])
             
             ->setPassword($this->passwordHasher->hashPassword(
