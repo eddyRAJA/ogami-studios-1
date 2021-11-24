@@ -42,6 +42,17 @@ class Illustration
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Gallery::class, inversedBy="illustrations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $gallery;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $decription;
+
 
     public function getId(): ?int
     {
@@ -75,12 +86,36 @@ class Illustration
     
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_At;
+        return $this->created_at;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_At;
+        return $this->updated_at;
+    }
+
+    public function getGallery(): ?Gallery
+    {
+        return $this->gallery;
+    }
+
+    public function setGallery(?Gallery $gallery): self
+    {
+        $this->gallery = $gallery;
+
+        return $this;
+    }
+
+    public function getDecription(): ?string
+    {
+        return $this->decription;
+    }
+
+    public function setDecription(string $decription): self
+    {
+        $this->decription = $decription;
+
+        return $this;
     }
 
 }
