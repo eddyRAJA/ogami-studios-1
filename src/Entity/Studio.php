@@ -2,9 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\StudioRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -24,12 +23,6 @@ class Studio
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity=Illustration::class, inversedBy="studios")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $picture;
 
     /**
      * @ORM\Column(type="text")
@@ -54,13 +47,6 @@ class Studio
      */
     private $updated_at;
 
-
-
-    public function __construct()
-    {
-        $this->picture = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -77,19 +63,6 @@ class Studio
         
         return $this;
     }
-    
-    public function getPicture(): ?Collection
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?Illustration $picture): self
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-    
     
     public function getDescription(): ?string
     {

@@ -2,9 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\IllustrationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -40,11 +38,6 @@ class Illustration
      * @ORM\JoinColumn(nullable=false)
      */
     private $gallery;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Studio::class, mappedBy="picture")
-     */
-    private $studios;
 
     /**
      * 
@@ -118,37 +111,6 @@ class Illustration
     public function setDescription(string $description): self
     {
         $this->description = $description;
-        
-        return $this;
-    }
-    
-    
-    /**
-     * @return Collection|Studio[]
-     */
-    public function getStudios(): Collection
-    {
-        return $this->studios;
-    }
-
-    public function addStudio(Studio $studio): self
-    {
-        if (!$this->studios->contains($studio)) {
-            $this->studios[] = $studio;
-            $studio->setPicture($this);
-        }
-        
-        return $this;
-    }
-    
-    public function removeStudio(Studio $studio): self
-    {
-        if ($this->studios->removeElement($studio)) {
-            // set the owning side to null (unless already changed)
-            if ($studio->getPicture() === $this) {
-                $studio->setPicture(null);
-            }
-        }
         
         return $this;
     }

@@ -25,7 +25,7 @@ class StudioFixtures extends Fixture implements DependentFixtureInterface
             for ($j=0; $j <rand(3, 10); $j++) {
                 # code...
   
-                $studio->setPicture($this->getReference('illustration_'.$j));
+                //$studio->setPicture($this->getReference('illustration_'.$j));
             }
             //->setImageInside($faker->imageUrl(680, 400, ['room']))
             //$studio->setImageBack($faker->imageUrl(680, 400, ['room']))
