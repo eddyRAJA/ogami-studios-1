@@ -15,8 +15,8 @@ class AboutFixtures extends Fixture
         $faker->addProvider(new \Xvladqt\Faker\LoremFlickrProvider($faker));
         // $product = new Product();
         $about = new About();
-        $about->setAvatar($faker->imageUrl(680, 400, ['avatar']))
-        ->setDescription($faker->sentence(rand(18, 35)))
+        $about->setAvatar($faker->imageUrl(680, 400, ['landscape']))
+        ->setDescription($faker->sentence(rand(5, 10)))
         ->setTitle($faker->word(rand(3, 6)))
         ->setSlogan($faker->sentence(rand(6, 15)))
         ->setFacebook($faker->url())

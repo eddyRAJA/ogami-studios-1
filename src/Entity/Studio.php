@@ -3,13 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass=IllustrationRepository::class)
+ * @ORM\Entity(repositoryClass=StudioRepository::class)
  */
-class Illustration
+class Studio
 {
     /**
      * @ORM\Id
@@ -22,43 +23,29 @@ class Illustration
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-    
+
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $description;
 
     /**
+     * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(type="string", length=255)
      */
-    private $url;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity=Gallery::class, inversedBy="illustrations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $gallery;
+    private $slug;
 
     /**
-     * 
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $created_at;
 
     /**
-     * 
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
-
-
-    public function __construct()
-    {
-        $this->studios = new ArrayCollection();
-    }
-
 
     public function getId(): ?int
     {
@@ -69,36 +56,10 @@ class Illustration
     {
         return $this->name;
     }
-
+    
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(string $url): self
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    
-    
-    public function getGallery(): ?Gallery
-    {
-        return $this->gallery;
-    }
-    
-    public function setGallery(?Gallery $gallery): self
-    {
-        $this->gallery = $gallery;
         
         return $this;
     }
@@ -107,14 +68,20 @@ class Illustration
     {
         return $this->description;
     }
-    
+
     public function setDescription(string $description): self
     {
         $this->description = $description;
-        
+
         return $this;
     }
 
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
@@ -124,4 +91,5 @@ class Illustration
     {
         return $this->updated_at;
     }
+
 }
