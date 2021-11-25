@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StudioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -17,26 +19,17 @@ class Studio
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-
+    
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Illustration::class, inversedBy="studios")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $imageFront;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $imageInside;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $imageBack;
+    private $picture;
 
     /**
      * @ORM\Column(type="text")
@@ -61,6 +54,13 @@ class Studio
      */
     private $updated_at;
 
+
+
+    public function __construct()
+    {
+        $this->picture = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,50 +70,27 @@ class Studio
     {
         return $this->name;
     }
-
+    
     public function setName(string $name): self
     {
         $this->name = $name;
+        
+        return $this;
+    }
+    
+    public function getPicture(): ?Collection
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?Illustration $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
-
-    public function getImageFront(): ?string
-    {
-        return $this->imageFront;
-    }
-
-    public function setImageFront(string $imageFront): self
-    {
-        $this->imageFront = $imageFront;
-
-        return $this;
-    }
-
-    public function getImageInside(): ?string
-    {
-        return $this->imageInside;
-    }
-
-    public function setImageInside(string $imageInside): self
-    {
-        $this->imageInside = $imageInside;
-
-        return $this;
-    }
-
-    public function getImageBack(): ?string
-    {
-        return $this->imageBack;
-    }
-
-    public function setImageBack(string $imageBack): self
-    {
-        $this->imageBack = $imageBack;
-
-        return $this;
-    }
-
+    
+    
     public function getDescription(): ?string
     {
         return $this->description;
@@ -131,11 +108,12 @@ class Studio
         return $this->slug;
     }
 
+    
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
     }
-
+    
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
