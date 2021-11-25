@@ -2,15 +2,14 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
+use App\Repository\EquipmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass=StudioRepository::class)
+ * @ORM\Entity(repositoryClass=EquipmentRepository::class)
  */
-class Studio
+class Equipment
 {
     /**
      * @ORM\Id
@@ -18,16 +17,31 @@ class Studio
      * @ORM\Column(type="integer")
      */
     private $id;
-    
+
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
     private $description;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="equipment_main", cascade={"persist", "remove"})
+     */
+    private $main_picture;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="equipment_second", cascade={"persist", "remove"})
+     */
+    private $second_picture;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Gallery::class, inversedBy="equipment", cascade={"persist", "remove"})
+     */
+    private $gallery;
 
     /**
      * @Gedmo\Slug(fields={"name"})
@@ -48,25 +62,9 @@ class Studio
     private $updated_at;
 
     /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="studio_front", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=EquipmentCategory::class, inversedBy="equipment")
      */
-    private $main_picture;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="inside_studio", cascade={"persist", "remove"})
-     */
-    private $inside_picture;
-    
-    /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="back_studio", cascade={"persist", "remove"})
-     */
-    private $back_illustration;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Gallery::class, inversedBy="studio", cascade={"persist", "remove"})
-     */
-    private $gallery;
-
+    private $category;
 
     public function getId(): ?int
     {
@@ -77,14 +75,14 @@ class Studio
     {
         return $this->name;
     }
-    
+
     public function setName(string $name): self
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -95,22 +93,6 @@ class Studio
         $this->description = $description;
 
         return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-    
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
     }
 
     public function getMainPicture(): ?Illustration
@@ -125,16 +107,14 @@ class Studio
         return $this;
     }
 
-   
-
-    public function getBackIllustration(): ?Illustration
+    public function getSecondPicture(): ?Illustration
     {
-        return $this->back_illustration;
+        return $this->second_picture;
     }
 
-    public function setBackIllustration(?Illustration $back_illustration): self
+    public function setSecondPicture(?Illustration $second_picture): self
     {
-        $this->back_illustration = $back_illustration;
+        $this->second_picture = $second_picture;
 
         return $this;
     }
@@ -151,14 +131,29 @@ class Studio
         return $this;
     }
 
-    public function getInsidePicture(): ?Illustration
+    public function getSlug(): ?string
     {
-        return $this->inside_picture;
+        return $this->slug;
     }
 
-    public function setInsidePicture(?Illustration $inside_picture): self
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        $this->inside_picture = $inside_picture;
+        return $this->created_at;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function getCategory(): ?EquipmentCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?EquipmentCategory $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
