@@ -31,19 +31,15 @@ class Equipment
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="equipment_main", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Illustration::class, cascade={"persist", "remove"})
      */
     private $main_picture;
 
     /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="equipment_second", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Illustration::class, cascade={"persist", "remove"})
      */
     private $second_picture;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Gallery::class, inversedBy="equipment", cascade={"persist", "remove"})
-     */
-    private $gallery;
 
     /**
      * @Gedmo\Slug(fields={"name"})
@@ -90,48 +86,6 @@ class Equipment
         return $this->description;
     }
 
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getMainPicture(): ?Illustration
-    {
-        return $this->main_picture;
-    }
-
-    public function setMainPicture(?Illustration $main_picture): self
-    {
-        $this->main_picture = $main_picture;
-
-        return $this;
-    }
-
-    public function getSecondPicture(): ?Illustration
-    {
-        return $this->second_picture;
-    }
-
-    public function setSecondPicture(?Illustration $second_picture): self
-    {
-        $this->second_picture = $second_picture;
-
-        return $this;
-    }
-
-    public function getGallery(): ?Gallery
-    {
-        return $this->gallery;
-    }
-
-    public function setGallery(?Gallery $gallery): self
-    {
-        $this->gallery = $gallery;
-
-        return $this;
-    }
 
     public function getSlug(): ?string
     {

@@ -30,7 +30,7 @@ class News
     private $content;
 
     /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="news", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Illustration::class, cascade={"persist", "remove"})
      */
     private $illustration;
 

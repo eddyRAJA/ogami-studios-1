@@ -21,8 +21,7 @@ class IllustrationFixtures extends Fixture implements DependentFixtureInterface
             # code...
             $illustration = new Illustration();
             $illustration->setName($faker->company())
-                ->setUrl($faker->imageUrl(680, 400, ['cinema']))
-                ->setDescription($faker->sentence(rand(5, 10)));
+                ->setUrl($faker->imageUrl(680, 400, ['cinema']));
             for ($j = 0; $j < count(GalleryFixtures::GALERIES_CATEGORIES); $j++) {
                 # code...
                 $illustration->setGallery($this->getReference('gallery_' . $j,  rand(0, count(GalleryFixtures::GALERIES_CATEGORIES) - 1), $illustration));

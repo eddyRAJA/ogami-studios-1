@@ -23,7 +23,7 @@ class EquipmentCategoryCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             TextField::new('name'),
-            SlugField::new('slug')->setTargetFieldName('name')->onlyOnIndex(),
+            SlugField::new('slug')->setTargetFieldName('name')->hideOnIndex(),
             DateTimeField::new('created_at')->onlyOnIndex()
         ];
     }

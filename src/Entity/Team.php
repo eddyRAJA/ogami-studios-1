@@ -39,7 +39,7 @@ class Team
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="team", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Illustration::class, cascade={"persist", "remove"})
      */
     private $image_profil;
 

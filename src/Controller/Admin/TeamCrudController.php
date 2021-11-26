@@ -29,7 +29,7 @@ class TeamCrudController extends AbstractCrudController
             TextField::new('job_title'),
             TextEditorField::new('description'),
             AssociationField::new('gallery'),
-            SlugField::new('slug')->setTargetFieldName('firstname')->onlyOnIndex(),
+            SlugField::new('slug')->setTargetFieldName('firstname')->hideOnIndex(),
             DateTimeField::new('created_at')->onlyOnIndex(),
             DateTimeField::new('updated_at')->onlyOnIndex(),
        

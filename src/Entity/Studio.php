@@ -49,24 +49,20 @@ class Studio
     private $updated_at;
 
     /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="studio_front", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Illustration::class, cascade={"persist", "remove"})
      */
     private $main_picture;
 
     /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="inside_studio", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Illustration::class, cascade={"persist", "remove"})
      */
     private $inside_picture;
     
     /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="back_studio", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Illustration::class, cascade={"persist", "remove"})
      */
     private $back_illustration;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Gallery::class, inversedBy="studio", cascade={"persist", "remove"})
-     */
-    private $gallery;
 
 
     public function getId(): ?int
@@ -136,18 +132,6 @@ class Studio
     public function setBackIllustration(?Illustration $back_illustration): self
     {
         $this->back_illustration = $back_illustration;
-
-        return $this;
-    }
-
-    public function getGallery(): ?Gallery
-    {
-        return $this->gallery;
-    }
-
-    public function setGallery(?Gallery $gallery): self
-    {
-        $this->gallery = $gallery;
 
         return $this;
     }
