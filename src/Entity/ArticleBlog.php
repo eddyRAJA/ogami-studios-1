@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\ArticleBlogCategoryRepository;
 use App\Repository\ArticleBlogRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;

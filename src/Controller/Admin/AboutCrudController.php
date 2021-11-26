@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class AboutCrudController extends AbstractCrudController
@@ -22,13 +23,13 @@ class AboutCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
+            TextField::new('slogan'),
             TextField::new('avatar'),
             TextEditorField::new('description'),
-            TextField::new('slogan'),
-            TextField::new('facebook'),
-            TextField::new('linkedin'),
-            TextField::new('instagram'),
-            TextField::new('twitter'),
+            UrlField::new('facebook'),
+            UrlField::new('linkedin'),
+            UrlField::new('instagram'),
+            UrlField::new('twitter'),
         ];
     }
     

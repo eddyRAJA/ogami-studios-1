@@ -99,6 +99,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->articleBlogs = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->email;
+        return $this->firstname;
+        return $this->laststname;
+    }
 
     public function getId(): ?int
     {
