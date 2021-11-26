@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\CompagnyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -68,6 +69,10 @@ class Compagny
     public function __construct()
     {
         $this->users = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int

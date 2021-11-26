@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Repository\EquipmentCategoryRepository;
+use App\Repository\EquipmentRepository;
+use ContainerCwUR6Hy\getEquipmentCategoryRepositoryService;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 

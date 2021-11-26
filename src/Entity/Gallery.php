@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-
+use App\Repository\GalleryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -73,6 +73,10 @@ class Gallery
     public function __construct()
     {
         $this->illustrations = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->title ;
     }
 
     public function getId(): ?int

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\IllustrationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -88,13 +89,17 @@ class Illustration
      */
     private $news;
 
-
+   
 
     public function __construct()
     {
         $this->studios = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {

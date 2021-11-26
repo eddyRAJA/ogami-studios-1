@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -97,6 +98,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->articleBlogs = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->email;
+        return $this->firstname;
+        return $this->laststname;
     }
 
     public function getId(): ?int
