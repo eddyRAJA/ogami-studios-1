@@ -28,7 +28,7 @@ class ContactCrudController extends AbstractCrudController
             EmailField::new('email'),
             TextField::new('subject'),
             TextEditorField::new('message'),
-            SlugField::new('slug')->setTargetFieldName('subject')->onlyOnIndex(),
+            SlugField::new('slug')->setTargetFieldName('subject')->hideOnIndex(),
             DateTimeField::new('created_at')->onlyOnIndex(),
             DateTimeField::new('updated_at')->onlyOnIndex()
         ];

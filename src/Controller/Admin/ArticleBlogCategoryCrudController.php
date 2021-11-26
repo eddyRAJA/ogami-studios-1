@@ -22,7 +22,7 @@ class ArticleBlogCategoryCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnDetail(),
             TextField::new('name'),
-            SlugField::new('slug')->setTargetFieldName('name')->onlyOnIndex(),
+            SlugField::new('slug')->setTargetFieldName('name')->hideOnIndex(),
         ];
     }
    

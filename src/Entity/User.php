@@ -90,15 +90,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $compagny;
 
-    /**
-     * @ORM\OneToMany(targetEntity=ArticleBlog::class, mappedBy="author")
-     */
-    private $articleBlogs;
-
-    public function __construct()
-    {
-        $this->articleBlogs = new ArrayCollection();
-    }
     public function __toString()
     {
         return $this->email;
@@ -302,33 +293,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|ArticleBlog[]
-     */
-    public function getArticleBlogs(): Collection
-    {
-        return $this->articleBlogs;
-    }
-
-    public function addArticleBlog(ArticleBlog $articleBlog): self
-    {
-        if (!$this->articleBlogs->contains($articleBlog)) {
-            $this->articleBlogs[] = $articleBlog;
-            $articleBlog->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticleBlog(ArticleBlog $articleBlog): self
-    {
-        if ($this->articleBlogs->removeElement($articleBlog)) {
-            // set the owning side to null (unless already changed)
-            if ($articleBlog->getAuthor() === $this) {
-                $articleBlog->setAuthor(null);
-            }
-        }
-
-        return $this;
-    }
 }

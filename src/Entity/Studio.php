@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\StudioRepository;
+use Doctrine\Common\Collections\Collection;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -49,24 +50,15 @@ class Studio
     private $updated_at;
 
     /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="studio_front", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Illustration::class, mappedBy="studio")
      */
-    private $main_picture;
+    private $illustrations;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="inside_studio", cascade={"persist", "remove"})
-     */
-    private $inside_picture;
-    
-    /**
-     * @ORM\OneToOne(targetEntity=Illustration::class, inversedBy="back_studio", cascade={"persist", "remove"})
-     */
-    private $back_illustration;
+    public function __construct()
+    {
+        $this->illustrations = new ArrayCollection();
+    }
 
-    /**
-     * @ORM\OneToOne(targetEntity=Gallery::class, inversedBy="studio", cascade={"persist", "remove"})
-     */
-    private $gallery;
 
 
     public function getId(): ?int
@@ -114,52 +106,32 @@ class Studio
         return $this->updated_at;
     }
 
-    public function getMainPicture(): ?Illustration
+    /**
+     * @return Collection|Illustration[]
+     */
+    public function getIllustrations(): Collection
     {
-        return $this->main_picture;
+        return $this->illustrations;
     }
 
-    public function setMainPicture(?Illustration $main_picture): self
+    public function addIllustration(Illustration $illustration): self
     {
-        $this->main_picture = $main_picture;
+        if (!$this->illustrations->contains($illustration)) {
+            $this->illustrations[] = $illustration;
+            $illustration->setStudio($this);
+        }
 
         return $this;
     }
 
-   
-
-    public function getBackIllustration(): ?Illustration
+    public function removeIllustration(Illustration $illustration): self
     {
-        return $this->back_illustration;
-    }
-
-    public function setBackIllustration(?Illustration $back_illustration): self
-    {
-        $this->back_illustration = $back_illustration;
-
-        return $this;
-    }
-
-    public function getGallery(): ?Gallery
-    {
-        return $this->gallery;
-    }
-
-    public function setGallery(?Gallery $gallery): self
-    {
-        $this->gallery = $gallery;
-
-        return $this;
-    }
-
-    public function getInsidePicture(): ?Illustration
-    {
-        return $this->inside_picture;
-    }
-
-    public function setInsidePicture(?Illustration $inside_picture): self
-    {
-        $this->inside_picture = $inside_picture;
+        if ($this->illustrations->removeElement($illustration)) {
+            // set the owning side to null (unless already changed)
+            if ($illustration->getStudio() === $this) {
+                $illustration->setStudio(null);
+            }
+        }
 
         return $this;
     }

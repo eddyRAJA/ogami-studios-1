@@ -32,7 +32,7 @@ class ArticleBlogCrudController extends AbstractCrudController
             UrlField::new('illustration'),
             AssociationField::new('category'),
             AssociationField::new('author')->onlyOnIndex(),
-            SlugField::new('slug')->setTargetFieldName('title')->onlyOnIndex(),
+            SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex(),
             DateTimeField::new('created_at')->onlyOnIndex()
 
         ];
