@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Illustration;
 use App\Entity\Studio;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
@@ -27,9 +28,6 @@ class StudioCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
             TextEditorField::new('description'),
-            AssociationField::new('main_picture'),
-            AssociationField::new('inside_picture'),
-            AssociationField::new('back_illustration'),
             DateTimeField::new('created_at')->onlyOnIndex(),
             DateTimeField::new('updated_at')->onlyOnIndex(),
             SlugField::new('slug')->setTargetFieldName('name')->hideOnIndex(),

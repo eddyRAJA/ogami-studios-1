@@ -24,12 +24,6 @@ class Illustration
      */
     private $name;
     
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $url;
-    
     /**
      * @ORM\ManyToOne(targetEntity=Gallery::class, inversedBy="illustrations")
      * @ORM\JoinColumn(nullable=false)
@@ -49,6 +43,11 @@ class Illustration
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Studio::class, inversedBy="illustrations")
+     */
+    private $studio;
 
 
     public function __toString()
@@ -73,20 +72,6 @@ class Illustration
         return $this;
     }
 
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(string $url): self
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    
-    
     public function getGallery(): ?Gallery
     {
         return $this->gallery;
@@ -108,6 +93,18 @@ class Illustration
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
+    }
+
+    public function getStudio(): ?Studio
+    {
+        return $this->studio;
+    }
+
+    public function setStudio(?Studio $studio): self
+    {
+        $this->studio = $studio;
+
+        return $this;
     }
 
     

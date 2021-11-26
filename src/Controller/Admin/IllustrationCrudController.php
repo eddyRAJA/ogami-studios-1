@@ -40,7 +40,6 @@ class IllustrationCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
-            UrlField::new('url'),
             AssociationField::new('gallery'),
             DateTimeField::new('created_at')->onlyOnIndex(),
             DateTimeField::new('updated_at')->onlyOnIndex(),
