@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -87,6 +89,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\ManyToOne(targetEntity=Compagny::class, inversedBy="users")
      */
     private $compagny;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ArticleBlog::class, mappedBy="author")
+     */
+    private $articleBlogs;
+
+    public function __construct()
+    {
+        $this->articleBlogs = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->email;
+        return $this->firstname;
+        return $this->laststname;
+    }
 
     public function getId(): ?int
     {
@@ -280,6 +298,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCompagny(?Compagny $compagny): self
     {
         $this->compagny = $compagny;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ArticleBlog[]
+     */
+    public function getArticleBlogs(): Collection
+    {
+        return $this->articleBlogs;
+    }
+
+    public function addArticleBlog(ArticleBlog $articleBlog): self
+    {
+        if (!$this->articleBlogs->contains($articleBlog)) {
+            $this->articleBlogs[] = $articleBlog;
+            $articleBlog->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticleBlog(ArticleBlog $articleBlog): self
+    {
+        if ($this->articleBlogs->removeElement($articleBlog)) {
+            // set the owning side to null (unless already changed)
+            if ($articleBlog->getAuthor() === $this) {
+                $articleBlog->setAuthor(null);
+            }
+        }
 
         return $this;
     }
