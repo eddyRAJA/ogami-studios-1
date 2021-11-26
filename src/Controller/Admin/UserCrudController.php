@@ -26,7 +26,6 @@ class UserCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('firstname'),
             TextField::new('lastname'),
-            # TextField::new('password'),
             TextField::new('email'),
             AssociationField::new('compagny'),
             TextField::new('adress'),
@@ -34,8 +33,6 @@ class UserCrudController extends AbstractCrudController
             TextField::new('state'),
             NumberField::new('phoneNumber'),
             TextField::new('jobName'),
-            TextField::new('password'),
-            ArrayField::new('roles')->onlyOnIndex(),
             DateTimeField::new('created_at')->onlyOnIndex(),
             DateTimeField::new('updated_at')->onlyOnIndex(),
 

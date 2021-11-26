@@ -26,7 +26,7 @@ class NewsCrudController extends AbstractCrudController
             TextField::new('title'),
             TextEditorField::new('content'),
             AssociationField::new('illustration'),
-            SlugField::new('slug')->setTargetFieldName('title')->onlyOnIndex(),
+            SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex(),
             DateTimeField::new('created_at')->onlyOnIndex(),
         ];
     }

@@ -54,20 +54,6 @@ class Gallery
      */
     private $slug;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Studio::class, mappedBy="gallery", cascade={"persist", "remove"})
-     */
-    private $studio;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Equipment::class, mappedBy="gallery", cascade={"persist", "remove"})
-     */
-    private $equipment;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Team::class, mappedBy="gallery", cascade={"persist", "remove"})
-     */
-    private $team;
 
 
     public function __construct()
@@ -152,72 +138,6 @@ class Gallery
     public function getSlug(): ?string
     {
         return $this->slug;
-    }
-
-    public function getStudio(): ?Studio
-    {
-        return $this->studio;
-    }
-
-    public function setStudio(?Studio $studio): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($studio === null && $this->studio !== null) {
-            $this->studio->setGallery(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($studio !== null && $studio->getGallery() !== $this) {
-            $studio->setGallery($this);
-        }
-
-        $this->studio = $studio;
-
-        return $this;
-    }
-
-    public function getEquipment(): ?Equipment
-    {
-        return $this->equipment;
-    }
-
-    public function setEquipment(?Equipment $equipment): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($equipment === null && $this->equipment !== null) {
-            $this->equipment->setGallery(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($equipment !== null && $equipment->getGallery() !== $this) {
-            $equipment->setGallery($this);
-        }
-
-        $this->equipment = $equipment;
-
-        return $this;
-    }
-
-    public function getTeam(): ?Team
-    {
-        return $this->team;
-    }
-
-    public function setTeam(?Team $team): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($team === null && $this->team !== null) {
-            $this->team->setGallery(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($team !== null && $team->getGallery() !== $this) {
-            $team->setGallery($this);
-        }
-
-        $this->team = $team;
-
-        return $this;
     }
 
 }
