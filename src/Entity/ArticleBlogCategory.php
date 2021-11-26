@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\ArticleBlogCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -38,6 +39,11 @@ class ArticleBlogCategory
     public function __construct()
     {
         $this->articleBlogs = new ArrayCollection();
+    }
+    
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int

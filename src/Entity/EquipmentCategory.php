@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-
+use App\Repository\EquipmentCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -45,6 +45,10 @@ class EquipmentCategory
     public function __construct()
     {
         $this->equipment = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int

@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Repository\TeamRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=TeamRepository::class)
@@ -42,16 +44,19 @@ class Team
     private $image_profil;
 
     /**
+     * @Gedmo\Slug(fields={"firstname"})
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $created_at;
 
     /**
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
