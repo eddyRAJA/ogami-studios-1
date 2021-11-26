@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\NewsRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 

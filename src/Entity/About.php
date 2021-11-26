@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\AboutRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

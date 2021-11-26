@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\EquipmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -62,7 +61,7 @@ class Equipment
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EquipmentCategory::class, inversedBy="equipment")
+     * @ORM\ManyToOne(targetEntity=EquipmentCategory::class, inversedBy="equipment", cascade={"persist", "remove"})
      */
     private $category;
 
