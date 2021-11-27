@@ -18,19 +18,20 @@ class StudioFixtures extends Fixture implements DependentFixtureInterface
 
         $faker->addProvider(new \Xvladqt\Faker\LoremFlickrProvider($faker));
 
-        for ($i=0; $i < 4; $i++) { 
+        for ($i = 0; $i < 4; $i++) {
             # code...
             $studio = new Studio();
             $studio->setName($faker->company());
-            for ($j=0; $j <rand(3, 10); $j++) {
+            for ($j = 0; $j < rand(3, 10); $j++) {
                 # code...
-  
+
                 //$studio->setPicture($this->getReference('illustration_'.$j));
             }
             //->setImageInside($faker->imageUrl(680, 400, ['room']))
-            //$studio->setImageBack($faker->imageUrl(680, 400, ['room']))
-            $studio->setDescription($faker->sentence(rand(5, 10)));
-
+            $studio->setDescription($faker->sentence(rand(5, 10)))
+                ->setStudioFrontPicture($faker->imageUrl(680, 400, ['room']))
+                ->setStudioIndoorPicture($faker->imageUrl(680, 400, ['room']))
+                ->setStudioBackgroundPicture($faker->imageUrl(680, 400, ['room']));
             $manager->persist($studio);
         }
 
