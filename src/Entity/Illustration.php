@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=IllustrationRepository::class)
+ * 
  */
 class Illustration
 {
@@ -28,7 +29,7 @@ class Illustration
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, )
      */
     private $illustration;
 

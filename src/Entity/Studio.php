@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StudioRepository::class)
+ * 
+ * 
  */
 class Studio
 {
@@ -36,6 +38,7 @@ class Studio
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $studioFrontPicture;
 
@@ -191,18 +194,18 @@ class Studio
 
         return $this;
     }
-
-    public function getStudioBackgroundPictureFile(): File
-    {
-        return $this->studioBackgroundPictureFile;
-    }
-
+    
     public function setStudioBackgroundPictureFile(File $studioBackgroundPictureFile): Studio
     {
         $this->studioBackgroundPictureFile = $studioBackgroundPictureFile;
 
         return $this;
     }
+    public function getStudioBackgroundPictureFile(): ?File
+    {
+        return $this->studioBackgroundPictureFile;
+    }
+
 
     public function getSlug(): ?string
     {

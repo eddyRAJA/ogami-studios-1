@@ -11,7 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class IllustrationCrudController extends AbstractCrudController
 {
@@ -32,7 +32,8 @@ class IllustrationCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
-            ImageField::new('illustration','image')->setUploadDir('/public/uploads/')->setBasePath('uploads/'),
+            TextField::new('illustrationFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new('illustration','image')->setUploadDir('/public/uploads/')->setBasePath('uploads/')->onlyOnIndex(),
             AssociationField::new('gallery'),
             DateTimeField::new('created_at')->onlyOnIndex(),
             DateTimeField::new('updated_at')->onlyOnIndex(),
