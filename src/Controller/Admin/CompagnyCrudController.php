@@ -37,7 +37,7 @@ class CompagnyCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setDefaultSort(['name' => 'DESC']);
+            ->setDefaultSort(['id' => 'DESC']);
     }
     
 }
