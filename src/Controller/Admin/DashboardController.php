@@ -49,11 +49,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Illustrations', 'fas fa-newspaper', Illustration::class);
         yield MenuItem::linkToCrud('Studios', 'fas fa-newspaper', Studio::class);
         yield MenuItem::linkToCrud('About-us', 'fas fa-user-tie', About::class);
-        # yield MenuItem::linkToCrud('EquipmentCategories', 'fas fa-newspaper', EquipmentCategory::class);
-        # yield MenuItem::linkToCrud('Equipments', 'fas fa-users', Equipment::class);
-        # yield MenuItem::linkToCrud('ArticleBlogCategories', 'fas fa-users', ArticleBlogCategory::class);
-        # yield MenuItem::linkToCrud('ArticleBlogs', 'fas fa-users', ArticleBlog::class);
-        # yield MenuItem::linkToCrud('Teams', 'fas fa-users', Team::class);
+        yield MenuItem::linkToCrud('EquipmentCategories', 'fas fa-newspaper', EquipmentCategory::class);
+        yield MenuItem::linkToCrud('Equipments', 'fas fa-users', Equipment::class);
+        yield MenuItem::linkToCrud('ArticleBlogCategories', 'fas fa-users', ArticleBlogCategory::class);
+        yield MenuItem::linkToCrud('ArticleBlogs', 'fas fa-users', ArticleBlog::class);
+        yield MenuItem::linkToCrud('Teams', 'fas fa-users', Team::class);
         yield MenuItem::linkToCrud('News', 'fas fa-users', News::class);
         yield MenuItem::linkToCrud('Newsletters', 'fas fa-users', Newsletter::class);
         yield MenuItem::linkToCrud('Contacts', 'fas fa-users', Contact::class);

@@ -24,7 +24,7 @@ class AboutCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
             TextField::new('slogan'),
-            ImageField::new('avatar'),
+            ImageField::new('avatar')->setUploadDir('/public/uploads/about/')->setBasePath('uploads/'),
             TextEditorField::new('description'),
             UrlField::new('facebook'),
             UrlField::new('linkedin'),

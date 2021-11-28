@@ -90,6 +90,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $compagny;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=ArticleBlog::class, inversedBy="author")
+     */
+    private $articleBlog;
+
     public function __toString()
     {
         return $this->email;
@@ -289,6 +294,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCompagny(?Compagny $compagny): self
     {
         $this->compagny = $compagny;
+
+        return $this;
+    }
+
+    public function getArticleBlog(): ?ArticleBlog
+    {
+        return $this->articleBlog;
+    }
+
+    public function setArticleBlog(?ArticleBlog $articleBlog): self
+    {
+        $this->articleBlog = $articleBlog;
 
         return $this;
     }
