@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use Symfony\Flex\Path;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ArticleBlogCrudController extends AbstractCrudController
 {
@@ -29,10 +30,11 @@ class ArticleBlogCrudController extends AbstractCrudController
             TextField::new('title'),
             TextField::new('subject'),
             TextEditorField::new('content'),
-            UrlField::new('illustration'),
+            TextField::new('illustrationFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new('illustration','image')->setUploadDir('/public/uploads/')->setBasePath('uploads/')->onlyOnIndex(),
             AssociationField::new('category'),
             AssociationField::new('author')->onlyOnIndex(),
-            SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex(),
+            SlugField::new('slug')->setTargetFieldName('title')->onlyOnDetail(),
             DateTimeField::new('created_at')->onlyOnIndex()
 
         ];
