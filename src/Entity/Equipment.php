@@ -2,22 +2,18 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use App\Repository\StudioRepository;
-use Doctrine\Common\Collections\Collection;
-
+use App\Repository\EquipmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
- * @ORM\Entity(repositoryClass=StudioRepository::class)
- *
- * 
+ * @ORM\Entity(repositoryClass=EquipmentRepository::class)
  */
-class Studio
+class Equipment
 {
     /**
      * @ORM\Id
@@ -38,12 +34,12 @@ class Studio
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     * @var string
      */
-    private $studioFrontPicture;
+    private $equipMainPicture;
 
     /**
-     * @Vich\UploadableField(mapping="illustration_file", fileNameProperty="studioFrontPicture")
+     * @Vich\UploadableField(mapping="illustration_file", fileNameProperty="equipMainPicture")
      * @Assert\File(
      *  maxSize = "1M",
      *  mimeTypes = {"image/jpeg", "image/png", "image/webp"},
@@ -51,15 +47,32 @@ class Studio
      * )
      * @var File
      */
-    private $studioFrontPictureFile;
+    private $equipMainPictureFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $equipSecondpicture;
+
+    /**
+     * @Vich\UploadableField(mapping="illustration_file", fileNameProperty="equipSecondpicture")
+     * @Assert\File(
+     *  maxSize = "1M",
+     *  mimeTypes = {"image/jpeg", "image/png", "image/webp"},
+     *  mimeTypesMessage = "Please upload a valid Format, jpeg, png, webp"
+     * )
+     * @var File
+     */
+    private $equipSecondpictureFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $studioIndoorPicture;
+    private $equipThirdPicture;
 
     /**
-     * @Vich\UploadableField(mapping="illustration_file", fileNameProperty="studioIndoorPicture")
+     * @Vich\UploadableField(mapping="illustration_file", fileNameProperty="equipThirdPicture")
      * @Assert\File(
      *  maxSize = "1M",
      *  mimeTypes = {"image/jpeg", "image/png", "image/webp"},
@@ -67,24 +80,13 @@ class Studio
      * )
      * @var File
      */
-    private $studioIndoorPictureFile;
-
+    private $equipThirdPictureFile;
+    
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity=EquipmentCategory::class, inversedBy="equipment")
      */
-    private $studioBackgroundPicture;
-
-    /**
-     * @Vich\UploadableField(mapping="illustration_file", fileNameProperty="studioBackgroundPicture")
-     * @Assert\File(
-     *  maxSize = "1M",
-     *  mimeTypes = {"image/jpeg", "image/png", "image/webp"},
-     *  mimeTypesMessage = "Please upload a valid Format, jpeg, png, webp"
-     * )
-     * @var File
-     */
-    private $studioBackgroundPictureFile;
-
+    private $category;
+    
     /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(type="string", length=255)
@@ -121,7 +123,6 @@ class Studio
         return $this;
     }
 
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -134,90 +135,101 @@ class Studio
         return $this;
     }
 
-
-    public function getStudioBackgroundPicture(): ?string
+    public function getEquipMainPicture(): ?string
     {
-        return $this->studioBackgroundPicture;
+        return $this->equipMainPicture;
     }
 
-    public function setStudioBackgroundPicture(string $studioBackgroundPicture): self
+    public function setEquipMainPicture(string $equipMainPicture): self
     {
-        $this->studioBackgroundPicture = $studioBackgroundPicture;
+        $this->equipMainPicture = $equipMainPicture;
 
         return $this;
     }
 
-    public function getStudioFrontPicture(): ?string
+    public function getEquipSecondpicture(): ?string
     {
-        return $this->studioFrontPicture;
+        return $this->equipSecondpicture;
     }
 
-    public function setStudioFrontPicture(string $studioFrontPicture): self
+    public function setEquipSecondpicture(?string $equipSecondpicture): self
     {
-        $this->studioFrontPicture = $studioFrontPicture;
+        $this->equipSecondpicture = $equipSecondpicture;
 
         return $this;
     }
 
-    public function getStudioIndoorPicture(): ?string
+    public function getEquipThirdPicture(): ?string
     {
-        return $this->studioIndoorPicture;
+        return $this->equipThirdPicture;
     }
 
-    public function setStudioIndoorPicture(?string $studioIndoorPicture): self
+    public function setEquipThirdPicture(?string $equipThirdPicture): self
     {
-        $this->studioIndoorPicture = $studioIndoorPicture;
+        $this->equipThirdPicture = $equipThirdPicture;
 
         return $this;
     }
 
-    public function getStudioFrontPictureFile(): ?File
+    
+    public function getCategory(): ?EquipmentCategory
     {
-        return $this->studioFrontPictureFile;
+        return $this->category;
     }
-
-    public function setStudioFrontPictureFile(File $studioFrontPictureFile): Studio
+    
+    public function setCategory(?EquipmentCategory $category): self
     {
-        $this->studioFrontPictureFile = $studioFrontPictureFile;
+        $this->category = $category;
 
         return $this;
     }
 
-    public function getStudioIndoorPictureFile(): ?File
+    public function setEquipMainPictureFile(File $equipMainPictureFile): Equipment
     {
-        return $this->studioIndoorPictureFile;
-    }
-
-    public function setStudioIndoorPictureFile(File $studioIndoorPictureFile): Studio
-    {
-        $this->studioIndoorPictureFile = $studioIndoorPictureFile;
-
+        $this->equipMainPictureFile = $equipMainPictureFile;
+        
         return $this;
     }
     
-    public function setStudioBackgroundPictureFile(File $studioBackgroundPictureFile): Studio
+    public function getEquipMainPictureFile(): ?File
     {
-        $this->studioBackgroundPictureFile = $studioBackgroundPictureFile;
+        return $this->equipMainPictureFile;
+    }
 
+    public function setEquipSecondpictureFile(File $equipSecondpictureFile): Equipment
+    {
+        $this->equipSecondpictureFile = $equipSecondpictureFile;
+        
         return $this;
     }
-    public function getStudioBackgroundPictureFile(): ?File
+    
+    public function getEquipSecondpictureFile(): ?File
     {
-        return $this->studioBackgroundPictureFile;
+        return $this->equipSecondpictureFile;
     }
 
+    public function setEquipThirdPictureFile(File $equipThirdPictureFile): Equipment
+    {
+        $this->equipThirdPictureFile = $equipThirdPictureFile;
+        
+        return $this;
+    }
+
+    public function getEquipThirdPictureFile(): File
+    {
+        return $this->equipThirdPictureFile;
+    }
 
     public function getSlug(): ?string
     {
         return $this->slug;
     }
-
-
+    
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
     }
-
+    
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;

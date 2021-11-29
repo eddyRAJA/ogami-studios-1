@@ -56,7 +56,7 @@ class Compagny
     private $faxNumber;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="compagny")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="compagny", cascade={"remove"})
      */
     private $users;
 

@@ -4,6 +4,11 @@ namespace App\Entity;
 
 use App\Repository\AboutRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=AboutRepository::class)
@@ -21,6 +26,16 @@ class About
      * @ORM\Column(type="string", length=255)
      */
     private $avatar;
+    /**
+     * @Vich\UploadableField(mapping="about_picture_file", fileNameProperty="avatar")
+     * @Assert\File(
+     *  maxSize = "1M",
+     *  mimeTypes = {"image/jpeg", "image/png", "image/webp"},
+     *  mimeTypesMessage = "Please upload a valid Format, jpeg, png, webp"
+     * )
+     * @var File
+     */
+    private $avatarFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -56,6 +71,20 @@ class About
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $twitter;
+
+    /**
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
 
     public function getId(): ?int
     {
@@ -157,4 +186,27 @@ class About
 
         return $this;
     }
+
+    public function setAvatarFile(File $avatarFile): About
+    {
+        $this->avatarFile = $avatarFile;
+
+        return $this;
+    }
+    
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
 }

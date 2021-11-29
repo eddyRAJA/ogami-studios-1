@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=IllustrationRepository::class)
+ * 
  */
 class Illustration
 {
@@ -28,7 +29,7 @@ class Illustration
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, )
      */
     private $illustration;
 
@@ -110,31 +111,28 @@ class Illustration
         return $this;
     }
 
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
-    }
-
-
     public function setIllustrationFile(File $image = null): Illustration
     {
-
+        
         $this->illustrationFile = $image;
 
         return $this;
     }
 
-
     public function getIllustrationFile(): ?File
-
+    
     {
-
+        
         return $this->illustrationFile;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+    
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
     }
 }

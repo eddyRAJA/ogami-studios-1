@@ -22,8 +22,8 @@ class GalleryCrudController extends AbstractCrudController
     {
         return $crud
             // the labels used to refer to this entity in titles, buttons, etc.
-            ->setEntityLabelInSingular('Gallery')
-            ->setEntityLabelInPlural('Galleries')
+            ->setEntityLabelInSingular('Galery')
+            ->setEntityLabelInPlural('Galeries')
             // set this option if you prefer the page content to span the entire
             // browser width, instead of the default design which sets a max width
             ->renderContentMaximized()
