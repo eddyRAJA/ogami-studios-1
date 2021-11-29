@@ -2,23 +2,22 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Team;
+use App\Entity\Member;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class TeamCrudController extends AbstractCrudController
+class MemberCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Team::class;
+        return Member::class;
     }
 
     
@@ -41,8 +40,6 @@ class TeamCrudController extends AbstractCrudController
             DateTimeField::new('created_at')->onlyOnIndex(),
             DateTimeField::new('updated_at')->onlyOnIndex(),
             SlugField::new('slug')->setTargetFieldName('firstname')->hideOnForm(),
-
-
         ];
     }
     

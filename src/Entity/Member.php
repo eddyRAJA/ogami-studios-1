@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\TeamRepository;
+use App\Repository\MemberRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
@@ -11,10 +11,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity(repositoryClass=TeamRepository::class)
+ * @ORM\Entity(repositoryClass=MemberRepository::class)
  * @Vich\Uploadable
  */
-class Team
+class Member
 {
     /**
      * @ORM\Id
@@ -245,7 +245,7 @@ class Team
         return $this;
     }
 
-    public function setAvatarFile(File $avatarFile): Team
+    public function setAvatarFile(File $avatarFile): Member
     {
         $this->avatarFile = $avatarFile;
         
