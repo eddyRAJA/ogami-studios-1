@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EquipmentRepository::class)
+ * @Vich\Uploadable
  */
 class Equipment
 {
@@ -51,7 +52,7 @@ class Equipment
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @var string
+     * 
      */
     private $equipSecondpicture;
 
@@ -116,7 +117,7 @@ class Equipment
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -128,7 +129,7 @@ class Equipment
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -140,7 +141,7 @@ class Equipment
         return $this->equipMainPicture;
     }
 
-    public function setEquipMainPicture(string $equipMainPicture): self
+    public function setEquipMainPicture(?string $equipMainPicture): self
     {
         $this->equipMainPicture = $equipMainPicture;
 
@@ -184,7 +185,7 @@ class Equipment
         return $this;
     }
 
-    public function setEquipMainPictureFile(File $equipMainPictureFile): Equipment
+    public function setEquipMainPictureFile(?File $equipMainPictureFile): Equipment
     {
         $this->equipMainPictureFile = $equipMainPictureFile;
         
@@ -208,14 +209,14 @@ class Equipment
         return $this->equipSecondpictureFile;
     }
 
-    public function setEquipThirdPictureFile(File $equipThirdPictureFile): Equipment
+    public function setEquipThirdPictureFile(?File $equipThirdPictureFile): Equipment
     {
         $this->equipThirdPictureFile = $equipThirdPictureFile;
         
         return $this;
     }
 
-    public function getEquipThirdPictureFile(): File
+    public function getEquipThirdPictureFile(): ?File
     {
         return $this->equipThirdPictureFile;
     }

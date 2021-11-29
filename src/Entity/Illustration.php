@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=IllustrationRepository::class)
- * 
+ * @Vich\Uploadable
  */
 class Illustration
 {
@@ -29,7 +29,8 @@ class Illustration
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, )
+     * @ORM\Column(length=255)
+     * @var string|null
      */
     private $illustration;
 
@@ -40,7 +41,7 @@ class Illustration
      *  mimeTypes = {"image/jpeg", "image/png", "image/webp"},
      *  mimeTypesMessage = "Please upload a valid Format, jpeg, png, webp"
      * )
-     * @var File
+     * @var File|null
      */
     private $illustrationFile;
 
@@ -79,24 +80,37 @@ class Illustration
     {
         return $this->name;
     }
-
-    public function setName(string $name): self
+    
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
+    public function setIllustrationFile(?File $illustrationFile = null): Void
+    {
+        
+        $this->illustrationFile = $illustrationFile;
+        if($illustrationFile)
+        {
+            $this->updated_at = new \DateTime();
+        }
+    }
+
+    public function getIllustrationFile(): ?File
+    {
+        return $this->illustrationFile;
+    }
+
+    public function setIllustration(?string  $illustration): void
+    {
+        $this->illustration = $illustration;
+    }
+
     public function getIllustration(): ?string
     {
         return $this->illustration;
-    }
-
-    public function setIllustration(string $illustration): self
-    {
-        $this->illustration = $illustration;
-
-        return $this;
     }
 
     public function getGallery(): ?Gallery
@@ -111,20 +125,6 @@ class Illustration
         return $this;
     }
 
-    public function setIllustrationFile(File $image = null): Illustration
-    {
-        
-        $this->illustrationFile = $image;
-
-        return $this;
-    }
-
-    public function getIllustrationFile(): ?File
-    
-    {
-        
-        return $this->illustrationFile;
-    }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {

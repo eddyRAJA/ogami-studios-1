@@ -31,7 +31,7 @@ class Gallery
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=Illustration::class, mappedBy="gallery")
+     * @ORM\OneToMany(targetEntity=Illustration::class, mappedBy="gallery", cascade={"remove"})
      */
     private $illustrations;
 
@@ -51,6 +51,7 @@ class Gallery
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(type="string", length=255)
+     * @var string|null
      */
     private $slug;
 
@@ -135,7 +136,7 @@ class Gallery
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getSlug(): string
     {
         return $this->slug;
     }

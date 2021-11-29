@@ -9,7 +9,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -28,9 +27,12 @@ class EquipmentCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
             TextEditorField::new('description'),
-            ImageField::new('equipMainPicture','Main Picture')->setUploadDir('/public/uploads/')->setBasePath('uploads/'),
-            ImageField::new('equipSecondPicture','Second Picture')->setUploadDir('/public/uploads/')->setBasePath('uploads/'),
-            ImageField::new('equipThirdPicture','Third Picture')->setUploadDir('/public/uploads/')->setBasePath('uploads/'),
+            TextEditorField::new('equipMainPictureFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new('equipMainPicture','Main Picture')->setUploadDir('/public/uploads/')->setBasePath('uploads/')->onlyOnIndex(),
+            TextEditorField::new('equipSecondpictureFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new('equipSecondPicture','SecondPicture')->setUploadDir('/public/uploads/')->setBasePath('uploads/')->onlyOnIndex(),
+            TextEditorField::new('equipThirdPictureFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new('equipThirdPicture','Third Picture')->setUploadDir('/public/uploads/')->setBasePath('uploads/')->onlyOnIndex(),
             DateTimeField::new('created_at')->onlyOnIndex(),
             DateTimeField::new('updated_at')->onlyOnIndex(),
             AssociationField::new('category')

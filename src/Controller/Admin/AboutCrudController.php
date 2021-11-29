@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AboutCrudController extends AbstractCrudController
 {
@@ -24,7 +25,8 @@ class AboutCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
             TextField::new('slogan'),
-            ImageField::new('avatar')->setUploadDir('/public/uploads/about/')->setBasePath('uploads/'),
+            TextEditorField::new('avatarFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new('avatar')->setUploadDir('/public/uploads/about/')->setBasePath('uploads/about')->onlyOnIndex(),
             TextEditorField::new('description'),
             UrlField::new('facebook'),
             UrlField::new('linkedin'),

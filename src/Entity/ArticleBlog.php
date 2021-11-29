@@ -41,6 +41,7 @@ class ArticleBlog
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $illustration;
 
@@ -135,7 +136,7 @@ class ArticleBlog
         return $this->illustration;
     }
 
-    public function setIllustration(string $illustration): self
+    public function setIllustration($illustration): self
     {
         $this->illustration = $illustration;
 
@@ -184,10 +185,16 @@ class ArticleBlog
         return $this;
     }
 
-    
+    /**
+     * @return void
+     */
     public function setIllustrationFile(File $illustrationFile): ArticleBlog
     {
         $this->illustrationFile = $illustrationFile;
+        if(null!== $illustrationFile)
+        {
+            $this->updated_at = new \DateTime();
+        }
         
         return $this;
     }

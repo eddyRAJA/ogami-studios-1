@@ -42,7 +42,7 @@ class GalleryCrudController extends AbstractCrudController
             TextEditorField::new('description'),
             DateTimeField::new('created_at')->onlyOnIndex(),
             DateTimeField::new('updated_at')->onlyOnIndex(),
-            SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex(),
+            SlugField::new('slug')->setTargetFieldName('title')->hideOnForm(),
         ];
     }
     

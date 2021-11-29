@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AboutRepository::class)
+ * @Vich\Uploadable
  */
 class About
 {
@@ -24,6 +25,7 @@ class About
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string|null
      */
     private $avatar;
     /**
@@ -38,11 +40,7 @@ class About
     private $avatarFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $description;
-
-    /**
+     * @ORM\Column(type="string", length=255)ArticleBlog
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -60,17 +58,17 @@ class About
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $instagram;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $linkedin;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $twitter;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $instagram;
 
     /**
      * 
@@ -86,6 +84,11 @@ class About
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,21 +99,9 @@ class About
         return $this->avatar;
     }
 
-    public function setAvatar(string $avatar): self
+    public function setAvatar($avatar): self
     {
         $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
 
         return $this;
     }
@@ -144,7 +135,7 @@ class About
         return $this->facebook;
     }
 
-    public function setFacebook(string $facebook): self
+    public function setFacebook(?string $facebook): self
     {
         $this->facebook = $facebook;
 
@@ -187,11 +178,13 @@ class About
         return $this;
     }
 
-    public function setAvatarFile(File $avatarFile): About
+    public function setAvatarFile(File $avatarFile):void
     {
         $this->avatarFile = $avatarFile;
-
-        return $this;
+        if(null!== $avatarFile)
+        {
+            $this->updatedAt = new \DateTime();
+        }
     }
     
     public function getAvatarFile(): ?File
@@ -207,6 +200,18 @@ class About
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
     }
 
 }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\StudioRepository;
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StudioRepository::class)
- *
+ * @Vich\Uploadable
  * 
  */
 class Studio
@@ -45,7 +46,7 @@ class Studio
     /**
      * @Vich\UploadableField(mapping="illustration_file", fileNameProperty="studioFrontPicture")
      * @Assert\File(
-     *  maxSize = "1M",
+     *  maxSize = "2M",
      *  mimeTypes = {"image/jpeg", "image/png", "image/webp"},
      *  mimeTypesMessage = "Please upload a valid Format, jpeg, png, webp"
      * )
@@ -54,14 +55,14 @@ class Studio
     private $studioFrontPictureFile;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $studioIndoorPicture;
 
     /**
      * @Vich\UploadableField(mapping="illustration_file", fileNameProperty="studioIndoorPicture")
      * @Assert\File(
-     *  maxSize = "1M",
+     *  maxSize = "2M",
      *  mimeTypes = {"image/jpeg", "image/png", "image/webp"},
      *  mimeTypesMessage = "Please upload a valid Format, jpeg, png, webp"
      * )
@@ -70,14 +71,14 @@ class Studio
     private $studioIndoorPictureFile;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $studioBackgroundPicture;
 
     /**
      * @Vich\UploadableField(mapping="illustration_file", fileNameProperty="studioBackgroundPicture")
      * @Assert\File(
-     *  maxSize = "1M",
+     *  maxSize = "2M",
      *  mimeTypes = {"image/jpeg", "image/png", "image/webp"},
      *  mimeTypesMessage = "Please upload a valid Format, jpeg, png, webp"
      * )
@@ -114,7 +115,7 @@ class Studio
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string  $name): self
     {
         $this->name = $name;
 
@@ -127,7 +128,7 @@ class Studio
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string  $description): self
     {
         $this->description = $description;
 
@@ -140,7 +141,7 @@ class Studio
         return $this->studioBackgroundPicture;
     }
 
-    public function setStudioBackgroundPicture(string $studioBackgroundPicture): self
+    public function setStudioBackgroundPicture(?string $studioBackgroundPicture): self
     {
         $this->studioBackgroundPicture = $studioBackgroundPicture;
 
@@ -152,7 +153,7 @@ class Studio
         return $this->studioFrontPicture;
     }
 
-    public function setStudioFrontPicture(string $studioFrontPicture): self
+    public function setStudioFrontPicture(?string $studioFrontPicture): self
     {
         $this->studioFrontPicture = $studioFrontPicture;
 
@@ -176,9 +177,14 @@ class Studio
         return $this->studioFrontPictureFile;
     }
 
-    public function setStudioFrontPictureFile(File $studioFrontPictureFile): Studio
+    public function setStudioFrontPictureFile(?File $image): Studio
     {
-        $this->studioFrontPictureFile = $studioFrontPictureFile;
+        $this->studioFrontPictureFile = $image;
+        if ($image) {
+
+            $this->updated_at = new DateTime('now');
+      
+          }
 
         return $this;
     }
@@ -187,25 +193,35 @@ class Studio
     {
         return $this->studioIndoorPictureFile;
     }
-
-    public function setStudioIndoorPictureFile(File $studioIndoorPictureFile): Studio
+    
+    public function setStudioIndoorPictureFile(?File $image): Studio
     {
-        $this->studioIndoorPictureFile = $studioIndoorPictureFile;
+        $this->studioIndoorPictureFile = $image;
+        if ($image) {
+
+            $this->updated_at = new DateTime('now');
+      
+          }
 
         return $this;
     }
     
-    public function setStudioBackgroundPictureFile(File $studioBackgroundPictureFile): Studio
-    {
-        $this->studioBackgroundPictureFile = $studioBackgroundPictureFile;
-
-        return $this;
-    }
     public function getStudioBackgroundPictureFile(): ?File
     {
         return $this->studioBackgroundPictureFile;
     }
 
+    public function setStudioBackgroundPictureFile(?File $image): Studio
+    {
+        $this->studioBackgroundPictureFile = $image;
+        if ($image) {
+
+            $this->updated_at = new DateTime('now');
+      
+          }
+
+        return $this;
+    }
 
     public function getSlug(): ?string
     {

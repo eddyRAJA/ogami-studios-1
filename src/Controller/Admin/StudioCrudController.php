@@ -12,7 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class StudioCrudController extends AbstractCrudController
 {
@@ -28,9 +28,12 @@ class StudioCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
             TextEditorField::new('description'),
-            ImageField::new('studioFrontPicture','image')->setUploadDir('/public/uploads/')->setBasePath('uploads/'),
-            ImageField::new('studioIndoorPicture','image')->setUploadDir('/public/uploads/')->setBasePath('uploads/'),
-            ImageField::new('studioBackgroundPicture','image')->setUploadDir('/public/uploads/')->setBasePath('uploads/'),
+            TextField::new('studioFrontPictureFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new('studioFrontPicture','image')->setUploadDir('/public/uploads/')->setBasePath('uploads/')->onlyOnIndex(),
+            TextField::new('studioIndoorPictureFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new('studioIndoorPicture','image')->setUploadDir('/public/uploads/')->setBasePath('uploads/')->onlyOnIndex(),
+            TextField::new('studioBackgroundPictureFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new('studioBackgroundPicture','image')->setUploadDir('/public/uploads/')->setBasePath('uploads/')->onlyOnIndex(),
             DateTimeField::new('created_at')->onlyOnIndex(),
             DateTimeField::new('updated_at')->onlyOnIndex(),
             SlugField::new('slug')->setTargetFieldName('name')->hideOnForm(),

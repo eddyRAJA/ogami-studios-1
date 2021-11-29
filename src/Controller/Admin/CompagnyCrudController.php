@@ -30,7 +30,7 @@ class CompagnyCrudController extends AbstractCrudController
             TextField::new('city'),
             TextField::new('state'),
             NumberField::new('faxNumber'),
-            SlugField::new('slug')->setTargetFieldName('name')->hideOnIndex(),
+            SlugField::new('slug')->setTargetFieldName('name')->hideOnForm(),
         ];
     }
 

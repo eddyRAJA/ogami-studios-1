@@ -14,3 +14,6 @@ vich_uploader:
             uri_prefix: /public/uploads/about
             upload_destination: '%upload_about_dir%'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            inject_on_load : false 
+            delete_on_update : true 
+            delete_on_remove : true
